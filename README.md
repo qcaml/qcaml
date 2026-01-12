@@ -24,7 +24,7 @@ $ sudo apt install opam   # debian/ubuntu
 $ opam init
 $ opam switch create 5.2.0
 $ eval $(opam env)
-$ opam install dune odoc alcotest bisect_ppx
+$ opam install dune odoc alcotest bisect_ppx raylib
 ```
 ### Install from OPAM (recommended)
 QCaml is now available on the official OPAM repository, so you can install it directly:
