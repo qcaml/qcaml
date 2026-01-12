@@ -66,6 +66,69 @@ let () =
 </tr>
 </table>
 
+## Architecture
+```mermaid
+graph TB
+    subgraph Core
+        A[QCaml]
+    end
+    
+    subgraph Foundation
+        B[Complex Module]
+        B1[Operations: mul, add, sub, mod, arg, conj]
+        B2[Constants: zero, one, minus_one]
+        B --> B1
+        B --> B2
+    end
+    
+    subgraph States
+        C[Qubit Module]
+        C1[Init: zero, one, plus, minus]
+        C2[Access: get_alpha, get_beta, print]
+        C --> C1
+        C --> C2
+    end
+    
+    subgraph Operations
+        D[Gate Module]
+        D1[Pauli: X, Y, Z]
+        D2[Hadamard: H]
+        D3[Phase: S, T]
+        D --> D1
+        D --> D2
+        D --> D3
+    end
+    
+    subgraph Measure
+        E[Measurement]
+        E1[Computational basis & collapse]
+        E --> E1
+    end
+    
+    subgraph Visual
+        F[Bloch Sphere]
+        F1[OpenGL/GLUT rendering]
+        F --> F1
+    end
+    
+    A --> B
+    A --> C
+    A --> D
+    A --> E
+    A --> F    
+    C --> B
+    D --> C
+    E --> C
+    F --> C
+    
+    style A fill:#ec6813,stroke:#333,stroke-width:3px,color:#fff
+    style B fill:#3c60b1,stroke:#333,color:#fff
+    style C fill:#3c60b1,stroke:#333,color:#fff
+    style D fill:#3c60b1,stroke:#333,color:#fff
+    style E fill:#3c60b1,stroke:#333,color:#fff
+    style F fill:#3c60b1,stroke:#333,color:#fff
+```
+
 ## Features
 <table>
   <thead>
