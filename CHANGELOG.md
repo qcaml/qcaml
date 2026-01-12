@@ -5,9 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Later
+- Rotation gates (Rx, Ry, Rz)
+- Multi-qubit systems with tensor products
+- Entangling gates (CNOT, Toffoli, SWAP)
+- Circuit builder API
+- QASM export functionality
+
 ## [0.1.6] - 2026-01-26
+### Added
+- raylib dependency
+
 ### Changed
 - Migrating to ocaml-raylib for bloch sphere visualisation
+
+### Removed
+- OpenGL/glut dependency
+- discover.ml file
 
 ## [0.1.5] - 2025-12-13
 ### Added
@@ -17,15 +33,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Improved .gitignore to exclude .vscode directory
-
-## [Unreleased]
-
-### Later
-- Rotation gates (Rx, Ry, Rz)
-- Multi-qubit systems with tensor products
-- Entangling gates (CNOT, Toffoli, SWAP)
-- Circuit builder API
-- QASM export functionality
 
 ## [0.1.4] - 2025-12-13
 ### Fixed
@@ -72,3 +79,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.1.1]: https://github.com/elias-utf8/qcaml/releases/tag/v0.1.1
 [0.1.2]: https://github.com/elias-utf8/qcaml/releases/tag/v0.1.2
 [0.1.3]: https://github.com/elias-utf8/qcaml/releases/tag/v0.1.3
+[0.1.4]: https://github.com/elias-utf8/qcaml/releases/tag/v0.1.4
+[0.1.5]: https://github.com/elias-utf8/qcaml/releases/tag/v0.1.5
+[0.1.6]: https://github.com/elias-utf8/qcaml/releases/tag/v0.1.6
+
+
