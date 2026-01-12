@@ -44,7 +44,7 @@ $ opam install .
 ```
 
 ## Quick start
-Try this simple example by running `dune exec examples/bloch_sphere.exe` to visualize a superposition state on the Bloch sphere:
+Try this simple example by running `dune exec examples/bloch_sphere.exe` to visualize a qubit |0> state on the Bloch sphere:
 
 <table>
 <tr>
