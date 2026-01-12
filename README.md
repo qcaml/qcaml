@@ -5,7 +5,7 @@ A lightweight OCaml library to experiment with quantum states, gates and measure
 [![License](https://img.shields.io/badge/License-Apache%202.0-3c60b1.svg?logo=opensourceinitiative&logoColor=white&style=flat-square)](https://github.com/elias-utf8/qcaml/blob/main/LICENSE)
 [![OCaml](https://img.shields.io/badge/OCaml-5.2-ec6813.svg?style=flat-square&logo=ocaml&logoColor=white)](https://ocaml.org/)
 [![CI Status](https://img.shields.io/github/actions/workflow/status/elias-utf8/qcaml/pages.yml?style=flat-square&logo=github&label=build)](https://github.com/elias-utf8/qcaml/actions/workflows/pages.yml)
-
+![Release](https://img.shields.io/github/v/release/elias-utf8/qcaml?style=flat-square)
 ## Presentation 
 
 <img src="https://github.com/elias-utf8/qcaml/blob/main/assets/images/snippet.png" width="300px" align="right">
