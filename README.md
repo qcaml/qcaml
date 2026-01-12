@@ -8,7 +8,7 @@ A lightweight OCaml library to experiment with quantum states, gates and measure
 
 ## Presentation 
 
-<img src="https://github.com/elias-utf8/qcaml/blob/main/assets/images/code_snippet2.png" width="300px" align="right">
+<img src="https://github.com/elias-utf8/qcaml/blob/main/assets/images/snippet.png" width="300px" align="right">
 
 QCaml for Quantum (O)Caml is an experimental library for simulating quantum algorithms. This library is currently under development. Among the MVP's features are qubit declaration, application of classical gates (X,Y,Z,H), measurement, and visualization.
 > [!IMPORTANT]
