@@ -23,13 +23,13 @@ Features:
 - Single qubit state representation with complex amplitudes
 - Fundamental quantum gates (Hadamard, Pauli-X/Y/Z)
 - Quantum measurements with probabilistic state collapse
-- Interactive Bloch sphere visualization using OpenGL/GLUT
+- Interactive Bloch sphere visualization using Raylib
 - Comprehensive test suite")
  (depends
   (ocaml (>= 5.2))
   (dune (>= 3.17))
   dune-configurator
-  conf-freeglut
+  raylib
   (alcotest :with-test)
   (odoc :with-doc)
   (bisect_ppx :with-test))

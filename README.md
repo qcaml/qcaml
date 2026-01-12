@@ -107,7 +107,7 @@ graph TB
     
     subgraph Visual
         F[Bloch Sphere]
-        F1[OpenGL/GLUT rendering]
+        F1[Raylib rendering]
         F --> F1
     end
     
