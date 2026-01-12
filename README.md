@@ -61,7 +61,7 @@ let () =
 ```
 </td>
 <td>
-  <img src="https://github.com/elias-utf8/qcaml/blob/main/assets/images/bloch.png" alt="Bloch Sphere" width="400">
+  <img src="https://github.com/elias-utf8/qcaml/blob/main/assets/images/bloch.png" alt="Bloch Sphere" width="300">
 </td>
 </tr>
 </table>
