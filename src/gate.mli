@@ -49,3 +49,10 @@ val s : q -> unit
             [β'] = [0·α + exp(i·π/4)·β] = [exp(i·π/4)·β]
 *)
 val t : q -> unit
+
+(**Rx gate
+   Matrice Rx = [[cos(θ/2), -i·sin(θ/2)], [-i·sin(θ/2), cos(θ/2)]]
+   Result: [α'] = [cos(θ/2)·α + (-i·sin(θ/2))·β]
+           [β'] = [(-i·sin(θ/2))·α + cos(θ/2)·β]
+*)
+val rx : q -> unit
