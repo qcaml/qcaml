@@ -161,7 +161,7 @@ graph TB
       <td>Visualization of qubit states on the Bloch sphere</td>
     </tr>
     <tr>
-      <td><strong>Advanced Gate</strong></td>
+      <td><strong>Advanced Gates</strong></td>
       <td><span>✓ Completed</span></td>
       <td>Extended gate set (Phase and rotation gates)</td>
     </tr>
