@@ -10,7 +10,7 @@ A lightweight OCaml library to experiment with quantum states, gates and measure
 
 <img src="https://github.com/elias-utf8/qcaml/blob/main/assets/images/snippet.png" width="300px" align="right">
 
-QCaml for Quantum (O)Caml is an experimental library for simulating quantum algorithms. This library is currently under development. Among the MVP's features are qubit declaration, application of classical gates (X,Y,Z,H), measurement, and visualization.
+QCaml for Quantum (O)Caml is an experimental library for simulating quantum algorithms. This library is currently under development. Among the MVP's features are qubit declaration, application of classical gates (X,Y,Z,H), measurement, and visualization.Extended gate set (Phase and rotation gates)
 > [!IMPORTANT]
 >
 > **Status**: This library is currently in early development and may change significantly.
@@ -162,17 +162,12 @@ graph TB
     </tr>
     <tr>
       <td><strong>Advanced Gate</strong></td>
-      <td><span>In progress..</span></td>
+      <td><span>✓ Completed</span></td>
       <td>Extended gate set (Phase and rotation gates)</td>
     </tr>
     <tr>
-      <td><strong>Circuit Builder</strong></td>
-      <td><span>○ Planned</span></td>
-      <td>High-level API for composing and optimizing quantum circuits</td>
-    </tr>
-    <tr>
       <td><strong>Multi-Qubit Operations</strong></td>
-      <td><span>○ Planned</span></td>
+      <td><span>In progress..</span></td>
       <td>Efficient tensor product operations for n-qubit systems</td>
     </tr>
     <tr>
