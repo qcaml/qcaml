@@ -37,7 +37,7 @@ jobs:
           opam install . --deps-only --with-doc
           opam install raylib
       
-      - name: Generate documentation
+      - name: Generate documentations
         run: opam exec -- dune build @doc
       
       - name: Prepare docs
