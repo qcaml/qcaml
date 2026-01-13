@@ -19,6 +19,11 @@
  (libraries quantum))
 
 (executable
- (public_name test_measurement_exe)
- (name test_measurement)
+ (public_name measure_exe)
+ (name measure)
+ (libraries quantum))
+
+(executable
+ (public_name rotation_exe)
+ (name rotation)
  (libraries quantum))

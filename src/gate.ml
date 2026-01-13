@@ -64,3 +64,39 @@ let t q =
   let new_beta = Complex.cmul exp_i_pi_4 q.beta in
   q.alpha <- new_alpha;
   q.beta <- new_beta
+
+let rx q theta = 
+  let theta_sub_2 = theta /. 2.0 in
+  let cos_theta_2 = cos theta_sub_2 in
+  let sin_theta_2 = sin theta_sub_2 in
+  let minus_i = { Complex.re = 0.0; im = -1.0 } in
+  let new_alpha = Complex.cadd
+    (Complex.cmul { Complex.re = cos_theta_2; im = 0.0 } q.alpha)
+    (Complex.cmul (Complex.cmul minus_i { Complex.re = sin_theta_2; im = 0.0 }) q.beta) in
+  let new_beta = Complex.cadd
+    (Complex.cmul (Complex.cmul minus_i { Complex.re = sin_theta_2; im = 0.0 }) q.alpha)
+    (Complex.cmul { Complex.re = cos_theta_2; im = 0.0 } q.beta) in
+  q.alpha <- new_alpha;
+  q.beta <- new_beta  
+  
+let ry q theta = 
+  let theta_sub_2 = theta /. 2.0 in
+  let cos_theta_2 = cos theta_sub_2 in
+  let sin_theta_2 = sin theta_sub_2 in
+  let new_alpha = Complex.cadd
+    (Complex.cmul { Complex.re = cos_theta_2; im = 0.0 } q.alpha)
+    (Complex.cmul { Complex.re = -. sin_theta_2; im = 0.0 } q.beta) in
+  let new_beta = Complex.cadd
+    (Complex.cmul { Complex.re = sin_theta_2; im = 0.0 } q.alpha)
+    (Complex.cmul { Complex.re = cos_theta_2; im = 0.0 } q.beta) in
+  q.alpha <- new_alpha;
+  q.beta <- new_beta
+
+let rz q theta = 
+  let theta_sub_2 = theta /. 2.0 in
+  let exp_minus_i_theta_2 = { Complex.re = cos (-. theta_sub_2); im = sin (-. theta_sub_2) } in
+  let exp_i_theta_2 = { Complex.re = cos theta_sub_2; im = sin theta_sub_2 } in
+  let new_alpha = Complex.cmul exp_minus_i_theta_2 q.alpha in
+  let new_beta = Complex.cmul exp_i_theta_2 q.beta in
+  q.alpha <- new_alpha;
+  q.beta <- new_beta;
