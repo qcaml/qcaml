@@ -3,8 +3,6 @@ name: Pages
 on:
   push:
     branches: [ main ]
-    paths:
-      - 'dune-project'
   workflow_dispatch:
 
 permissions:
