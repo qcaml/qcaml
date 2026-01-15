@@ -19,6 +19,11 @@ type complex = {
   im : float;
 }
 
+let string_of_complex c =
+    let str_re : string  = string_of_float c.re in
+    let str_im : string = string_of_float c.im in
+    str_re ^ " + " ^ str_im ^ "i"
+
 let zero = { re = 0.0; im = 0.0 }
 
 let one = { re = 1.0; im = 0.0 }

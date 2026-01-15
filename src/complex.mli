@@ -7,10 +7,10 @@
 *)
 
 (** Type complex with real and imaginary part *)
-type complex = {
-  re : float;
-  im : float;
-}
+type complex = { re: float; im: float}
+
+(** Return complex number as string**)
+val string_of_complex : complex -> string
 
 (** Zero complex number *)
 val zero : complex
