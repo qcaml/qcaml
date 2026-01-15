@@ -1,6 +1,6 @@
 type qreg  = {
     n_qubits: int;
-    mutable amplitudes : Complex.complex array
+    amplitudes : Complex.complex array
 }
 
 let allocate n = 
@@ -18,3 +18,7 @@ let dim qreg = 1 lsl qreg.n_qubits
 let get_amplitude qreg index = qreg.amplitudes.(index)
 
 let set_amplitude qreg index amp = qreg.amplitudes.(index) <- amp
+
+let display qreg =
+  print_endline (string_of_int qreg.n_qubits ^ " qubits register");
+  Array.iter (fun elem -> print_endline (Complex.string_of_complex elem)) qreg.amplitudes

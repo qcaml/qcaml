@@ -11,3 +11,5 @@ val dim : qreg -> int
 val get_amplitude : qreg -> int -> Complex.complex
 
 val set_amplitude : qreg -> int -> Complex.complex -> unit
+
+val display : qreg -> unit
