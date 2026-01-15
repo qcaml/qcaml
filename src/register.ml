@@ -3,7 +3,10 @@ type qreg  = {
     amplitudes : Complex.complex array
 }
 
-let allocate n = 
+let allocate n =
+  if n < 0 then
+    invalid_arg "Number of qubits must be non-negative";
+
   let size = 1 lsl n in (* 2^n *)
 
   (*create array of size element*)
@@ -15,9 +18,17 @@ let size qreg = qreg.n_qubits
 
 let dim qreg = 1 lsl qreg.n_qubits
 
-let get_amplitude qreg index = qreg.amplitudes.(index)
+let get_amplitude qreg index =
+  if index < 0 || index >= Array.length qreg.amplitudes then
+    invalid_arg (Printf.sprintf "Index %d out of bounds [0, %d)" 
+                  index (Array.length qreg.amplitudes));
+  qreg.amplitudes.(index)
 
-let set_amplitude qreg index amp = qreg.amplitudes.(index) <- amp
+let set_amplitude qreg index amp =
+  if index < 0 || index >= Array.length qreg.amplitudes then
+    invalid_arg (Printf.sprintf "Index %d out of bounds [0, %d)" 
+                  index (Array.length qreg.amplitudes));
+  qreg.amplitudes.(index) <- amp
 
 let display qreg =
   print_endline (string_of_int qreg.n_qubits ^ " qubits register");
