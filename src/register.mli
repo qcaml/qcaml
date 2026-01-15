@@ -1,8 +1,13 @@
-open Complex
+(** Type representing n qubits register *)
+type qreg
 
-type t = {
-  n_qubits : int;                    (* Nombre de qubits *)
-  mutable amplitudes : Qubit.q array;  (* Taille 2^n *)
-}
+(** Allocate n qubit register *)
+val allocate : int -> qreg
 
-val allocate : int n -> Qubit.q array;
+val size : qreg -> int
+
+val dim : qreg -> int
+
+val get_amplitude : qreg -> int -> Complex.complex
+
+val set_amplitude : qreg -> int -> Complex.complex -> unit

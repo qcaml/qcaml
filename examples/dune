@@ -27,3 +27,9 @@
  (public_name rotation_exe)
  (name rotation)
  (libraries quantum))
+
+(executable
+ (public_name try_register_exe)
+ (name try_register)
+ (libraries quantum))
+
