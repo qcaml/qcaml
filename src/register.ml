@@ -21,4 +21,6 @@ let set_amplitude qreg index amp = qreg.amplitudes.(index) <- amp
 
 let display qreg =
   print_endline (string_of_int qreg.n_qubits ^ " qubits register");
-  Array.iter (fun elem -> print_endline (Complex.string_of_complex elem)) qreg.amplitudes
+  Array.iteri (fun i elem ->
+    print_endline (string_of_int i ^ ": " ^ Complex.string_of_complex elem)
+  ) qreg.amplitudes
