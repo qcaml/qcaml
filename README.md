@@ -169,7 +169,7 @@ graph TB
     <tr>
       <td><strong>Multi-Qubit Operations</strong></td>
       <td><span>In progress..</span></td>
-      <td>Efficient tensor product operations for n-qubit systems</td>
+      <td>Implementation of n-qubit systems with qubit register</td>
     </tr>
     <tr>
       <td><strong>Simulator</strong></td>
