@@ -1,7 +1,7 @@
 (**
   @author       Elias GAUTHIER
   file :        complex.mli
-  date :        2025-10-02
+  date :        2026-01-16
   license :     Apache-2.0
   description : Implementation of complex operations.
 *)
