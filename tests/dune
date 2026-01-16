@@ -5,13 +5,7 @@
  (instrumentation (backend bisect_ppx)))
 
 (test
- (name test_qubit)
- (modules test_qubit)
- (libraries quantum alcotest)
- (instrumentation (backend bisect_ppx)))
-
-(test
- (name test_gate)
- (modules test_gate)
+ (name test_register)
+ (modules test_register)
  (libraries quantum alcotest)
  (instrumentation (backend bisect_ppx)))
