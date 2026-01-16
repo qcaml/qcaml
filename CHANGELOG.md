@@ -8,13 +8,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Later
-- Rotation gates (Rx, Ry, Rz)
-- Multi-qubit systems with tensor products
+- Multi-qubit systems
 - Entangling gates (CNOT, Toffoli, SWAP)
 - Circuit builder API
 - QASM export functionality
 
-## [0.1.6] - 2026-01-26
+## [0.1.7] - 2026-01-16
+### Removed
+- Eliminating unnecessary explicit dune constraint
+
+## [0.1.6] - 2026-01-06
 ### Added
 - raylib dependency
 
