@@ -25,5 +25,3 @@ let strbin_of_int n =
       temp := !temp / 2
     done;
     !result
-
-      
