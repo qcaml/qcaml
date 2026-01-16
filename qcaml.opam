@@ -29,8 +29,8 @@ homepage: "https://github.com/elias-utf8/qcaml"
 doc: "https://elias-utf8.github.io/qcaml/"
 bug-reports: "https://github.com/elias-utf8/qcaml/issues"
 depends: [
-  "ocaml" {>= "5.2"}
   "dune" {>= "3.17"}
+  "ocaml" {>= "5.2"}
   "dune-configurator"
   "raylib"
   "alcotest" {with-test}
