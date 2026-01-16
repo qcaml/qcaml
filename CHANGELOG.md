@@ -14,8 +14,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - QASM export functionality
 
 ## [0.1.7] - 2026-01-16
+### Added
+- Implementation of rotation gates (Rx, Rz, Ry)
+
 ### Removed
-- Eliminating unnecessary explicit dune constraint
+- Eliminating unnecessary explicit dune constraint in dune-project
 
 ## [0.1.6] - 2026-01-06
 ### Added
