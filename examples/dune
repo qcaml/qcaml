@@ -1,34 +1,4 @@
 (executable
- (public_name init_qubit_exe)
- (name init_qubit)
- (libraries quantum))
-
-(executable
- (public_name apply_gate_exe)
- (name apply_gate)
- (libraries quantum))
-
-(executable
- (public_name statistics_exe)
- (name statistics)
- (libraries quantum))
-
-(executable
- (public_name bloch_exe)
- (name bloch_sphere)
- (libraries quantum))
-
-(executable
- (public_name measure_exe)
- (name measure)
- (libraries quantum))
-
-(executable
- (public_name rotation_exe)
- (name rotation)
- (libraries quantum))
-
-(executable
  (public_name try_register_exe)
  (name try_register)
  (libraries quantum))

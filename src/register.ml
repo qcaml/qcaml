@@ -46,6 +46,9 @@ let set_amplitude qreg index amp =
                   index (Array.length qreg.amplitudes));
   qreg.amplitudes.(index) <- amp
 
+let get_qubit_value i qubit_index =
+  (i lsr qubit_index) land 1
+
 let display qreg =
   print_endline (string_of_int qreg. n_qubits ^ " qubits register");
   for i = 0 to Array.length qreg.amplitudes - 1 do

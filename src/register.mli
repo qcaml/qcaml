@@ -20,4 +20,6 @@ val get_amplitude : qreg -> int -> Complex.complex
 
 val set_amplitude : qreg -> int -> Complex.complex -> unit
 
+val get_qubit_value : int -> int -> int 
+
 val display : qreg -> unit
