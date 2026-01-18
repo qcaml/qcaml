@@ -14,7 +14,7 @@ A lightweight OCaml library to experiment with quantum states, gates and measure
 QCaml for Quantum (O)Caml is an experimental library for simulating quantum algorithms. This library is currently under development. Among the MVP's features are qubit declaration, application of classical gates (X,Y,Z,H), measurement, and visualization.Extended gate set (Phase and rotation gates)
 > [!IMPORTANT]
 >
-> **Status**: This library is currently in early development and may change significantly.
+> **Status**: I am currently working on the major release 1.0. Please consider previous versions as experimental and unfinished.
 >
 
 ## Installation
