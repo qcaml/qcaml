@@ -2,5 +2,5 @@
  (name quantum)
  (public_name qcaml)
  (libraries raylib)
- (modules utils register complex)
+ (modules register complex gate visualization utils)
  (instrumentation (backend bisect_ppx)))

@@ -3,3 +3,8 @@
  (name try_register)
  (libraries quantum))
 
+(executable
+ (public_name apply_gate_exe)
+ (name apply_gate)
+ (libraries quantum))
+

@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *)
- 
+
 type qreg  = {
     n_qubits: int;
-    amplitudes : Complex.complex array
+    mutable amplitudes : Complex.complex array
 }
 
 let allocate n =
@@ -46,13 +46,33 @@ let set_amplitude qreg index amp =
                   index (Array.length qreg.amplitudes));
   qreg.amplitudes.(index) <- amp
 
-let get_qubit_value i qubit_index =
-  (i lsr qubit_index) land 1
-
-let display qreg =
-  print_endline (string_of_int qreg. n_qubits ^ " qubits register");
+let display_qreg qreg =
   for i = 0 to Array.length qreg.amplitudes - 1 do
     let strbin = Utils.strbin_of_int i in
     let padded = String.make (qreg.n_qubits - String.length strbin) '0' ^ strbin in
     print_endline ("|" ^ padded ^ "⟩ " ^ Complex. string_of_complex qreg.amplitudes.(i))
   done
+
+let get_qubit qreg k =
+  let alpha = ref Complex.zero in
+  let beta = ref Complex.zero in
+  for i = 0 to dim qreg - 1 do
+    (*We apply a left shift and an AND operation 
+      to check the k-th bit of i is 0 or 1.
+
+      Then we accumulate the corresponding amplitudes
+      in alpha for |0> and beta for |1>.
+    *)
+    if i land (1 lsl k) = 0 then
+      alpha := Complex.cadd !alpha (get_amplitude qreg i)
+    else
+      beta := Complex.cadd !beta (get_amplitude qreg i)
+  done;
+  (alpha, beta)
+
+let display_qubit qreg k =
+  let alpha, beta = get_qubit qreg k in
+  Printf.printf "|ψ%d⟩ = (%s)|0⟩ + (%s)|1⟩\n"
+    k
+    (Complex.string_of_complex !alpha)
+    (Complex.string_of_complex !beta)

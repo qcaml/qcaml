@@ -30,6 +30,10 @@ let one = { re = 1.0; im = 0.0 }
 
 let minus_one = { re = -1.0; im = 0.0 }
 
+let minus_i = { re = 0.0; im = -1.0} 
+
+let i = { re = 0.0; im = 1.0} 
+
 let cadd c1 c2 =
   { re = c1.re +. c2.re;
     im = c1.im +. c2.im }
@@ -55,3 +59,7 @@ let cmod c =
 
 let carg c =
   atan2 c.im c.re
+
+let cneg c =
+  { re = -. c.re;
+    im = -. c.im }

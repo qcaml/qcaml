@@ -21,6 +21,12 @@ val one : complex
 (** Minus one complex number *)
 val minus_one : complex
 
+(** Minus i complex number *)
+val minus_i : complex
+
+(** i complex number *)
+val i : complex
+
 (** Complex multiplication
 
   (a+ib)(c+id)=(ac−bd)+i(ad+bc)
@@ -73,3 +79,10 @@ val cmod: complex -> float
   @return The angle of c
 *)
 val carg : complex -> float
+
+
+(** Complex negation
+  @param c Complex number
+  @return The negation of c
+*)
+val cneg : complex -> complex
