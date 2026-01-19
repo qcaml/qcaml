@@ -9,3 +9,9 @@
  (modules test_register)
  (libraries quantum alcotest)
  (instrumentation (backend bisect_ppx)))
+
+(test
+ (name test_gate)
+ (modules test_gate)
+ (libraries quantum alcotest)
+ (instrumentation (backend bisect_ppx)))

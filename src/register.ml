@@ -50,7 +50,7 @@ let display_qreg qreg =
   for i = 0 to Array.length qreg.amplitudes - 1 do
     let strbin = Utils.strbin_of_int i in
     let padded = String.make (qreg.n_qubits - String.length strbin) '0' ^ strbin in
-    print_endline ("|" ^ padded ^ "⟩ " ^ Complex. string_of_complex qreg.amplitudes.(i))
+    print_endline ("|" ^ padded ^ "⟩ " ^ Complex.string_of_complex qreg.amplitudes.(i))
   done
 
 let get_qubit qreg k =

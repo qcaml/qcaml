@@ -1,4 +1,4 @@
-open Quantum. Register
+open Quantum.Register
 open Quantum.Complex
 
 let test_allocate () =
@@ -67,7 +67,7 @@ let test_get_qubit_superposition () =
   Alcotest.(check (float 0.001)) "beta" sqrt2_inv !beta.re
 
 let () =
-  Alcotest. run "Register" [
+  Alcotest.run "Register" [
     "allocate", [
       Alcotest.test_case "2 qubits" `Quick test_allocate;
       Alcotest.test_case "1 qubit" `Quick test_allocate_single_qubit;

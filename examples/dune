@@ -1,10 +1,9 @@
 (executable
- (public_name try_register_exe)
- (name try_register)
+ (public_name superposition_exe)
+ (name superposition)
  (libraries quantum))
 
 (executable
- (public_name apply_gate_exe)
- (name apply_gate)
+ (public_name interference_exe)
+ (name interference)
  (libraries quantum))
-

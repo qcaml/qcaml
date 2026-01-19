@@ -46,3 +46,22 @@ val h : Register.qreg -> int -> unit
   @param theta The rotation angle in radians.
 *)
 val rx : Register.qreg -> int -> float -> unit
+
+
+(**
+  Apply the Rotation-Y gate to the target qubit of the given quantum register.
+
+  @param qreg The quantum register to which the gate is applied.
+  @param target The index of the target qubit (0-based).
+  @param theta The rotation angle in radians.
+*)
+val ry : Register.qreg -> int -> float -> unit
+
+(**
+  Apply the Rotation-Z gate to the target qubit of the given quantum register.
+
+  @param qreg The quantum register to which the gate is applied.
+  @param target The index of the target qubit (0-based).
+  @param theta The rotation angle in radians.
+*)
+val rz : Register.qreg -> int -> float -> unit

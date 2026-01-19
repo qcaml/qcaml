@@ -1,7 +1,7 @@
 (**
   @author       Elias GAUTHIER
   file :        utils.mli
-  date :        2026-16-01
+  date :        2026-01-16
   license :     Apache-2.0
   description : Various utility functions for qcaml.
 *)

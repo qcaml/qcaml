@@ -63,7 +63,7 @@ let test_string_of_complex() =
 
 let () =
   let open Alcotest in
-  run "Complex tests" [
+  run "Complex" [
     "addition", [ test_case "cadd" `Quick test_cadd ];
     "multiplication", [ test_case "cmul" `Quick test_cmul];
     "soustraction", [test_case "csub" `Quick test_csub];

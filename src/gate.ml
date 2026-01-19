@@ -36,7 +36,7 @@ let y (qreg :Register.qreg) target =
     if i land (1 lsl target) = 0 then
       let pair = i lxor (1 lsl target) in
         amps_copy.(i) <- Complex.cmul Complex.minus_i qreg.amplitudes.(pair);
-        amps_copy.(pair) <- Complex.cmul Complex.minus_i qreg.amplitudes.(i)
+        amps_copy.(pair) <- Complex.cmul Complex.i qreg.amplitudes.(i)
     done;
   qreg.amplitudes <- amps_copy
 
@@ -64,11 +64,35 @@ let h (qreg : Register.qreg) target =
 let rx (qreg : Register.qreg) target phase =
   let amps_copy = Array.copy qreg.amplitudes in
   let phi2 = phase /. 2.0 in
+  let cos_phi2 = cos phi2 in
+  let minus_i_sin_phi2 = Complex.{ re = 0.0; im = -. sin phi2 } in
   for i=0 to Register.dim qreg - 1 do
     if i land (1 lsl target) = 0 then
       let pair = i lxor (1 lsl target) in
-      amps_copy.(i) <- Complex.cadd (Complex.cmul_scalar (cos phi2) qreg.amplitudes.(i)) (Complex.cmul_scalar (Complex.minus_i.im *. sin phi2) qreg.amplitudes.(pair));
-      amps_copy.(pair) <- Complex.cadd (Complex.cmul_scalar (Complex.minus_i.im *. sin phi2) qreg.amplitudes.(i)) (Complex.cmul_scalar (cos phi2) qreg.amplitudes.(pair));
+      amps_copy.(i) <- Complex.cadd (Complex.cmul_scalar cos_phi2 qreg.amplitudes.(i)) (Complex.cmul minus_i_sin_phi2 qreg.amplitudes.(pair));
+      amps_copy.(pair) <- Complex.cadd (Complex.cmul minus_i_sin_phi2 qreg.amplitudes.(i)) (Complex.cmul_scalar cos_phi2 qreg.amplitudes.(pair));
     done;
   qreg.amplitudes <- amps_copy
-      
+
+let ry (qreg : Register.qreg) target phase =
+  let amps_copy = Array.copy qreg.amplitudes in
+  let phi2 = phase /. 2.0 in
+  for i=0 to Register.dim qreg - 1 do
+    if i land (1 lsl target) = 0 then
+      let pair = i lxor (1 lsl target) in
+      amps_copy.(i) <- Complex.cadd (Complex.cmul_scalar (cos phi2) qreg.amplitudes.(i)) (Complex.cmul_scalar (-.sin phi2) qreg.amplitudes.(pair));
+      amps_copy.(pair) <- Complex.cadd (Complex.cmul_scalar (sin phi2) qreg.amplitudes.(i)) (Complex.cmul_scalar (cos phi2) qreg.amplitudes.(pair));
+    done;
+  qreg.amplitudes <- amps_copy
+
+let rz (qreg : Register.qreg) target phase =
+  let amps_copy = Array.copy qreg.amplitudes in
+  let exp_i_phi2 = Complex.{ re = cos (phase /. 2.0); im = sin (phase /. 2.0) } in
+  let exp_minus_i_phi2 = Complex.{ re = cos (phase /. 2.0); im = -. sin (phase /. 2.0) } in
+  for i=0 to Register.dim qreg - 1 do
+    if i land (1 lsl target) = 0 then
+      let pair = i lxor (1 lsl target) in
+      amps_copy.(i) <- Complex.cmul exp_minus_i_phi2 qreg.amplitudes.(i);
+      amps_copy.(pair) <- Complex.cmul exp_i_phi2 qreg.amplitudes.(pair);
+    done;
+  qreg.amplitudes <- amps_copy
