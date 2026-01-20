@@ -65,3 +65,11 @@ val ry : Register.qreg -> int -> float -> unit
   @param theta The rotation angle in radians.
 *)
 val rz : Register.qreg -> int -> float -> unit
+
+(** Apply the CNOT gate to the target qubit controlled by the control qubit of the given quantum register.
+  
+  @param qreg The quantum register to which the gate is applied.
+  @param control The index of the control qubit (0-based).
+  @param target The index of the target qubit (0-based).
+*)
+val cnot : Register.qreg -> int -> int -> unit

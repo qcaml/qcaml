@@ -61,9 +61,9 @@ let h (qreg : Register.qreg) target =
     done;
   qreg.amplitudes <- amps_copy
 
-let rx (qreg : Register.qreg) target phase =
+let rx (qreg : Register.qreg) target phi =
   let amps_copy = Array.copy qreg.amplitudes in
-  let phi2 = phase /. 2.0 in
+  let phi2 = phi /. 2.0 in
   let cos_phi2 = cos phi2 in
   let minus_i_sin_phi2 = Complex.{ re = 0.0; im = -. sin phi2 } in
   for i=0 to Register.dim qreg - 1 do
@@ -74,9 +74,9 @@ let rx (qreg : Register.qreg) target phase =
     done;
   qreg.amplitudes <- amps_copy
 
-let ry (qreg : Register.qreg) target phase =
+let ry (qreg : Register.qreg) target phi =
   let amps_copy = Array.copy qreg.amplitudes in
-  let phi2 = phase /. 2.0 in
+  let phi2 = phi /. 2.0 in
   for i=0 to Register.dim qreg - 1 do
     if i land (1 lsl target) = 0 then
       let pair = i lxor (1 lsl target) in
@@ -85,10 +85,10 @@ let ry (qreg : Register.qreg) target phase =
     done;
   qreg.amplitudes <- amps_copy
 
-let rz (qreg : Register.qreg) target phase =
+let rz (qreg : Register.qreg) target phi =
   let amps_copy = Array.copy qreg.amplitudes in
-  let exp_i_phi2 = Complex.{ re = cos (phase /. 2.0); im = sin (phase /. 2.0) } in
-  let exp_minus_i_phi2 = Complex.{ re = cos (phase /. 2.0); im = -. sin (phase /. 2.0) } in
+  let exp_i_phi2 = Complex.{ re = cos (phi /. 2.0); im = sin (phi /. 2.0) } in
+  let exp_minus_i_phi2 = Complex.{ re = cos (phi /. 2.0); im = -. sin (phi /. 2.0) } in
   for i=0 to Register.dim qreg - 1 do
     if i land (1 lsl target) = 0 then
       let pair = i lxor (1 lsl target) in
@@ -96,3 +96,15 @@ let rz (qreg : Register.qreg) target phase =
       amps_copy.(pair) <- Complex.cmul exp_i_phi2 qreg.amplitudes.(pair);
     done;
   qreg.amplitudes <- amps_copy
+
+let cnot (qreg : Register.qreg) control target =
+  let amps_copy = Array.copy qreg.amplitudes in
+  for i = 0 to Register.dim qreg - 1 do
+    let pair = i lxor (1 lsl target) in
+    if (i land (1 lsl control)) <> 0 then
+      amps_copy.(i) <- qreg.amplitudes.(pair)
+    else
+      amps_copy.(i) <- qreg.amplitudes.(i)
+  done;
+  qreg.amplitudes <- amps_copy
+      
