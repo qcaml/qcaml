@@ -30,7 +30,7 @@ let x (qreg : Register.qreg) target =
   done;
   qreg.amplitudes <- amps_copy
 
-let y (qreg :Register.qreg) target =
+let y (qreg : Register.qreg) target =
   let amps_copy = Array.copy qreg.amplitudes in
   for i=0 to Register.dim qreg - 1 do
     if i land (1 lsl target) = 0 then
