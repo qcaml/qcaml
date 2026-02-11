@@ -12,3 +12,9 @@
     @return String binary representation
 *)
 val strbin_of_int : int -> string
+
+(** Get random float between 0 and 1
+
+    @return Float number
+*)
+val randfloat : unit -> int

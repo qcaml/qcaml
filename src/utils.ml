@@ -25,3 +25,7 @@ let strbin_of_int n =
       temp := !temp / 2
     done;
     !result
+
+let randfloat =
+    Random.self_init ();
+    Random.float 1.0
