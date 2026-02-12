@@ -17,4 +17,4 @@ val strbin_of_int : int -> string
 
     @return Float number
 *)
-val randfloat : unit -> int
+val randfloat : unit -> float

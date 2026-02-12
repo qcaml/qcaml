@@ -17,32 +17,32 @@
 let measure qreg target =
     let ran_number = Utils.randfloat () in
     let p0 = ref 0.0 in
-    for i = 0 to dim qreg - 1 do
+    for i = 0 to Register.dim qreg - 1 do
         if i land (1 lsl target) = 0 then
-            p0 := !p0 +. (Complex.norm qreg.state.(i)) ** 2.0
+            p0 := !p0 +. (Complex.cmod (Register.get_amplitude qreg i)) ** 2.0
     done;
     if ran_number < !p0 then begin
-        (* measurement give 0 *)
-        for i = 0 to dim qreg - 1 do
+        (* measurement gives 0 *)
+        for i = 0 to Register.dim qreg - 1 do
             if i land (1 lsl target) <> 0 then
-                qreg.state.(i) <- Complex.zero
+                Register.set_amplitude qreg i Complex.zero
         done;
         (* normalize *)
         let norm = sqrt !p0 in
-        for i = 0 to dim qreg - 1 do
-            qreg.state.(i) <- Complex.div qreg.state.(i) (Complex.of_float norm)
-        done;
-        0
+        for i = 0 to Register.dim qreg - 1 do
+            let amp = Register.get_amplitude qreg i in
+            Register.set_amplitude qreg i (Complex.cmul_scalar (1.0 /. norm) amp)
+        done
     end else begin
-        (* measurement give 1 *)
-        for i = 0 to dim qreg - 1 do
+        (* measurement gives 1 *)
+        for i = 0 to Register.dim qreg - 1 do
             if i land (1 lsl target) = 0 then
-                qreg.state.(i) <- Complex.zero
+                Register.set_amplitude qreg i Complex.zero
         done;
         (* normalize *)
         let norm = sqrt (1.0 -. !p0) in
-        for i = 0 to dim qreg - 1 do
-            qreg.state.(i) <- Complex.div qreg.state.(i) (Complex.of_float norm)
-        done;
-        1
+        for i = 0 to Register.dim qreg - 1 do
+            let amp = Register.get_amplitude qreg i in
+            Register.set_amplitude qreg i (Complex.cmul_scalar (1.0 /. norm) amp)
+        done
     end

@@ -26,6 +26,6 @@ let strbin_of_int n =
     done;
     !result
 
-let randfloat =
+let randfloat () =
     Random.self_init ();
     Random.float 1.0
