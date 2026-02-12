@@ -67,6 +67,25 @@ let test_rz () =
   float_eq "amp |0⟩ im" (-.sqrt2_inv) amp0.im;
   float_eq "amp |1⟩ im" sqrt2_inv amp1.im
 
+(* Test CNOT on |10⟩ -> |11⟩ *)
+let test_cnot () =
+  let reg = allocate 2 in
+  x reg 0;  (* Create |10⟩ *)
+  cnot reg 0 1;  (* Should flip to |11⟩ *)
+  let amp11 = get_amplitude reg 3 in
+  float_eq "amp |11⟩" 1.0 amp11.re
+
+(* Test CNOT creates Bell state *)
+let test_cnot_bell () =
+  let reg = allocate 2 in
+  h reg 0;
+  cnot reg 0 1;
+  let amp00 = get_amplitude reg 0 in
+  let amp11 = get_amplitude reg 3 in
+  let sqrt2_inv = 1.0 /. sqrt 2.0 in
+  float_eq "amp |00⟩" sqrt2_inv amp00.re;
+  float_eq "amp |11⟩" sqrt2_inv amp11.re
+
 let () =
   Alcotest.run "Gate" [
     "pauli", [
@@ -81,5 +100,9 @@ let () =
       Alcotest.test_case "Rx gate" `Quick test_rx;
       Alcotest.test_case "Ry gate" `Quick test_ry;
       Alcotest.test_case "Rz gate" `Quick test_rz;
+    ];
+    "entangling", [
+      Alcotest.test_case "CNOT" `Quick test_cnot;
+      Alcotest.test_case "Bell state" `Quick test_cnot_bell;
     ]
   ]

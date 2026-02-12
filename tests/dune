@@ -15,3 +15,9 @@
  (modules test_gate)
  (libraries quantum alcotest)
  (instrumentation (backend bisect_ppx)))
+
+(test
+ (name test_measurement)
+ (modules test_measurement)
+ (libraries quantum alcotest)
+ (instrumentation (backend bisect_ppx)))
