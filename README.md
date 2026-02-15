@@ -11,11 +11,7 @@ A lightweight OCaml library to experiment with quantum states, gates and measure
 
 <img src="https://github.com/elias-utf8/qcaml/blob/main/assets/images/snippet.png" width="300px" align="right">
 
-QCaml for Quantum (O)Caml is an experimental library for simulating quantum algorithms. This library is currently under development. Among the MVP's features are qubit declaration, application of classical gates (X,Y,Z,H), measurement, and visualization.Extended gate set (Phase and rotation gates)
-> [!IMPORTANT]
->
-> **Status**: This library is currently in early development and may change significantly.
->
+QCaml for Quantum (O)Caml is a library for simulating quantum algorithms. It provides n-qubit registers, quantum gates (Pauli, Hadamard, rotations, CNOT), measurement with state collapse, and interactive Bloch sphere visualization.
 
 ## Installation
 ### Prerequisites
@@ -44,21 +40,22 @@ $ opam install .
 ```
 
 ## Quick start
-Try this simple example by running `dune exec examples/bloch_sphere.exe` to visualize a qubit |0> state on the Bloch sphere:
+Try this simple example by running `dune exec examples/superposition.exe` to visualize a qubit in superposition on the Bloch sphere:
 
 <table>
 <tr>
 <td>
 
 ```ocaml
-(* examples/bloch_sphere.ml *)
+(* examples/superposition.ml *)
 open Quantum
 
 let () =
-  let q = Qubit.zero () in
-  Visualization.plot_bloch q ();
-  Measurement.measure q;
-  Printf.printf "%s\n" (Qubit.print () q);
+  let reg = Register.allocate 1 in
+  Register.display_qubit reg 0;
+  Gate.h reg 0;
+  Register.display_qubit reg 0;
+  Visualization.plot_bloch reg 0 ()
 ```
 </td>
 <td>
@@ -73,55 +70,57 @@ graph TB
     subgraph Core
         A[QCaml]
     end
-    
+
     subgraph Foundation
         B[Complex Module]
         B1[Operations: mul, add, sub, mod, arg, conj]
-        B2[Constants: zero, one, minus_one]
+        B2[Constants: zero, one, minus_one, i]
         B --> B1
         B --> B2
     end
-    
+
     subgraph States
-        C[Qubit Module]
-        C1[Init: zero, one, plus, minus]
-        C2[Access: get_alpha, get_beta, print]
+        C[Register Module]
+        C1[Init: allocate n]
+        C2[Access: get/set amplitude, get_qubit, display]
         C --> C1
         C --> C2
     end
-    
+
     subgraph Operations
         D[Gate Module]
         D1[Pauli: X, Y, Z]
         D2[Hadamard: H]
-        D3[Phase: S, T]
+        D3[Rotation: Rx, Ry, Rz]
+        D4[Entangling: CNOT]
         D --> D1
         D --> D2
         D --> D3
+        D --> D4
     end
-    
+
     subgraph Measure
         E[Measurement]
-        E1[Computational basis & collapse]
+        E1[Partial measurement, collapse & renormalization]
         E --> E1
     end
-    
+
     subgraph Visual
         F[Bloch Sphere]
         F1[Raylib rendering]
         F --> F1
     end
-    
+
     A --> B
     A --> C
     A --> D
     A --> E
-    A --> F    
+    A --> F
     C --> B
     D --> C
     E --> C
     F --> C
-    
+
     style A fill:#ec6813,stroke:#333,stroke-width:3px,color:#fff
     style B fill:#3c60b1,stroke:#333,color:#fff
     style C fill:#3c60b1,stroke:#333,color:#fff
@@ -162,19 +161,19 @@ graph TB
       <td>Visualization of qubit states on the Bloch sphere</td>
     </tr>
     <tr>
-      <td><strong>Advanced Gates</strong></td>
+      <td><strong>Rotation Gates</strong></td>
       <td><span>✓ Completed</span></td>
-      <td>Extended gate set (Phase and rotation gates)</td>
+      <td>Rx, Ry, Rz with arbitrary angle rotations</td>
     </tr>
     <tr>
       <td><strong>Multi-Qubit Operations</strong></td>
-      <td><span>In progress..</span></td>
-      <td>Efficient tensor product operations for n-qubit systems</td>
+      <td><span>✓ Completed</span></td>
+      <td>N-qubit registers with CNOT entangling gate</td>
     </tr>
     <tr>
       <td><strong>Simulator</strong></td>
-      <td><span>○ Planned (I will never have time)</span></td>
-      <td>Export circuits to standard formats (QASM, diagram generation)</td>
+      <td><span>○ Planned</span></td>
+      <td>Circuit builder API, QASM export</td>
     </tr>
   </tbody>
 </table>
