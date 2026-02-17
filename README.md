@@ -39,15 +39,13 @@ $ opam install .
 
 ## Quick start
 Try this simple example by running `dune exec examples/superposition.exe` to visualize a qubit in superposition on the Bloch sphere:
-
-<table>
+<table align="center">
 <tr>
 <td>
-
+  
 ```ocaml
 (* examples/superposition.ml *)
 open Quantum
-
 let () =
   let reg = Register.allocate 1 in
   Register.display_qubit reg 0;
@@ -55,15 +53,18 @@ let () =
   Register.display_qubit reg 0;
   Visualization.plot_bloch reg 0 ()
 ```
+
 </td>
 <td>
-  <img src="https://github.com/qcaml/qcaml/blob/main/assets/images/bloch.png" alt="Bloch Sphere" width="300">
+  <img src="https://github.com/qcaml/qcaml/blob/main/assets/images/bloch.png" alt="Bloch Sphere" width="350">
 </td>
 </tr>
 </table>
 
 ## Architecture
-<img src="https://github.com/elias-utf8/qcaml/blob/main/assets/images/diag_qcaml.svg" alt="QCaml architecture diagram">
+<p align="center">
+  <img src="https://github.com/elias-utf8/qcaml/blob/main/assets/images/diag_qcaml.svg" alt="QCaml architecture diagram">
+</p>
 
 ## Features
 <table>
