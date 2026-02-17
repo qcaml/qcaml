@@ -7,3 +7,8 @@
  (public_name interference_exe)
  (name interference)
  (libraries quantum))
+
+(executable
+ (public_name bell_state_exe)
+ (name bell_state)
+ (libraries quantum))
