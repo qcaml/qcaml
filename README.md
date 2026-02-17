@@ -63,69 +63,7 @@ let () =
 </table>
 
 ## Architecture
-```mermaid
-graph TB
-    subgraph Core
-        A[QCaml]
-    end
-
-    subgraph Foundation
-        B[Complex Module]
-        B1[Operations: mul, add, sub, mod, arg, conj]
-        B2[Constants: zero, one, minus_one, i]
-        B --> B1
-        B --> B2
-    end
-
-    subgraph States
-        C[Register Module]
-        C1[Init: allocate n]
-        C2[Access: get/set amplitude, get_qubit, display]
-        C --> C1
-        C --> C2
-    end
-
-    subgraph Operations
-        D[Gate Module]
-        D1[Pauli: X, Y, Z]
-        D2[Hadamard: H]
-        D3[Rotation: Rx, Ry, Rz]
-        D4[Entangling: CNOT]
-        D --> D1
-        D --> D2
-        D --> D3
-        D --> D4
-    end
-
-    subgraph Measure
-        E[Measurement]
-        E1[Partial measurement, collapse & renormalization]
-        E --> E1
-    end
-
-    subgraph Visual
-        F[Bloch Sphere]
-        F1[Raylib rendering]
-        F --> F1
-    end
-
-    A --> B
-    A --> C
-    A --> D
-    A --> E
-    A --> F
-    C --> B
-    D --> C
-    E --> C
-    F --> C
-
-    style A fill:#ec6813,stroke:#333,stroke-width:3px,color:#fff
-    style B fill:#3c60b1,stroke:#333,color:#fff
-    style C fill:#3c60b1,stroke:#333,color:#fff
-    style D fill:#3c60b1,stroke:#333,color:#fff
-    style E fill:#3c60b1,stroke:#333,color:#fff
-    style F fill:#3c60b1,stroke:#333,color:#fff
-```
+<img src="https://github.com/elias-utf8/qcaml/blob/main/assets/images/diag_qcaml.svg" alt="QCaml architecture diagram">
 
 ## Features
 <table>
