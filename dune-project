@@ -27,7 +27,6 @@ Features:
 - Comprehensive test suite")
  (depends
   (ocaml (>= 5.2))
-  (dune (>= 3.17))
   dune-configurator
   raylib
   (alcotest :with-test)

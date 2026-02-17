@@ -89,8 +89,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Single-qubit operations only (no multi-qubit support)
 - Limited gate set
 - No circuit builder API yet
-- Bloch sphere visualization can be a little buggy
-
 ---
 
 [1.0.0]: https://github.com/elias-utf8/qcaml/releases/tag/v1.0.0
@@ -101,5 +99,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.1.4]: https://github.com/elias-utf8/qcaml/releases/tag/v0.1.4
 [0.1.5]: https://github.com/elias-utf8/qcaml/releases/tag/v0.1.5
 [0.1.6]: https://github.com/elias-utf8/qcaml/releases/tag/v0.1.6
+[0.1.7]: https://github.com/elias-utf8/qcaml/releases/tag/v0.1.7
 
 
