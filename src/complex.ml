@@ -1,5 +1,5 @@
 (*
- * Copyright 2025 Elias GAUTHIER <elias.gauthier@etu.u-bordeaux.fr>
+ * Copyright 2026 Elias GAUTHIER <elias.gauthier@etu.u-bordeaux.fr>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,11 +19,20 @@ type complex = {
   im : float;
 }
 
+let string_of_complex c =
+    let str_re : string  = string_of_float c.re in
+    let str_im : string = string_of_float c.im in
+    str_re ^ " + " ^ str_im ^ "i"
+
 let zero = { re = 0.0; im = 0.0 }
 
 let one = { re = 1.0; im = 0.0 }
 
 let minus_one = { re = -1.0; im = 0.0 }
+
+let minus_i = { re = 0.0; im = -1.0} 
+
+let i = { re = 0.0; im = 1.0} 
 
 let cadd c1 c2 =
   { re = c1.re +. c2.re;
@@ -37,7 +46,7 @@ let csub c1 c2 =
   { re = c1.re -. c2.re;
     im = c1.im -. c2.im }
 
-  let cconj c =
+let cconj c =
   { re = c.re;
     im = -. c.im }
 
@@ -50,3 +59,7 @@ let cmod c =
 
 let carg c =
   atan2 c.im c.re
+
+let cneg c =
+  { re = -. c.re;
+    im = -. c.im }

@@ -1,95 +1,75 @@
 (**
   @author       Elias GAUTHIER
   file :        gate.mli
-  date :        2025-16-02
+  date :        2026-01-16
   license :     Apache-2.0
-  description : Implementation of gates (X, Z, Y, Hadamard, S, T)
+  description : Implementation of gates (X, Z, Y, Hadamard) for n-qubit register
 *)
-open Qubit
 
-(** X gate
-    Matrice X = [[0, 1], [1, 0]]
-    Result: [α'] = [0·α + 1·β] = [β]
-            [β']   [1·α + 0·β]   [α]
-    @param q Qubit to apply the gate on
-    @return unit
-
+(** 
+  Apply the X (NOT) gate to the target qubit of the given quantum register.
+  
+  @param qreg The quantum register to which the gate is applied.
+  @param target The index of the target qubit (0-based).
 *)
-val x : q -> unit
+val x : Register.qreg -> int -> unit
 
-(** Y gate
-    Matrice Y = [[0, -i], [i, 0]]
-    Result: [α'] = [0·α + i·β] = [i·β]
-            [β']   [(-i)·α + 0·β] = [-i·α]
-    @param q Qubit to apply the gate on
-    @return unit
-
+(** 
+  Apply the Y gate to the target qubit of the given quantum register.
+  
+  @param qreg The quantum register to which the gate is applied.
+  @param target The index of the target qubit (0-based).
 *)
-val y : q -> unit
+val y : Register.qreg -> int -> unit
 
-(** Z gate
-    Matrice Z = [[1, 0], [0, -1]]
-    Result: [α'] = [1·α + 0·β] = [α]
-            [β']   [0·α + (-1)·β] = [-β]
-    @param q Qubit to apply the gate on
-    @return unit
+(**   
+  Apply the Z gate to the target qubit of the given quantum register.
+  
+  @param qreg The quantum register to which the gate is applied.
+  @param target The index of the target qubit (0-based).
 *)
-val z : q -> unit
+val z : Register.qreg -> int -> unit
 
-(** Hadamard gate
-    Matrice H = 1/√2 × [[1, 1], [1, -1]]
-    Result: [α'] = 1/√2 × [1·α + 1·β] = (α + β)/√2
-            [β'] = 1/√2 × [1·α + (-1)·β] = (α - β)/√2
-    @param q Qubit to apply the gate on
-    @return unit
+(** 
+  Apply the Hadamard gate to the target qubit of the given quantum register.
+  
+  @param qreg The quantum register to which the gate is applied.
+  @param target The index of the target qubit (0-based).
 *)
-val h : q -> unit
+val h : Register.qreg -> int -> unit
 
+(**
+  Apply the Rotation-X gate to the target qubit of the given quantum register.
 
-(**S gate
-    Matrice S = [[1, 0], [0, i]]
-    Result: [α'] = [1·α + 0·β] = [α]
-            [β'] = [0·α + i·β] = [i·β]
-    @param q Qubit to apply the gate on
-    @return unit
+  @param qreg The quantum register to which the gate is applied.
+  @param target The index of the target qubit (0-based).
+  @param theta The rotation angle in radians.
 *)
-val s : q -> unit
+val rx : Register.qreg -> int -> float -> unit
 
-(**T gate
-    Matrice T = [[1, 0], [0, exp(i·π/4)]]
-    Result: [α'] = [1·α + 0·β] = [α]
-            [β'] = [0·α + exp(i·π/4)·β] = [exp(i·π/4)·β]
-    @param q Qubit to apply the gate on
-    @return unit
-*)
-val t : q -> unit
 
-(**Rx gate
-   Matrice Rx = [[cos(θ/2), -i·sin(θ/2)], [-i·sin(θ/2), cos(θ/2)]]
-   Result: [α'] = [cos(θ/2)·α + (-i·sin(θ/2))·β]
-           [β'] = [(-i·sin(θ/2))·α + cos(θ/2)·β]
-    @param q Qubit to apply the gate on
-    @param theta Angle in radians
-    @return unit
-*)
-val rx : q -> float -> unit
+(**
+  Apply the Rotation-Y gate to the target qubit of the given quantum register.
 
-(**Ry gate
-   Matrice Ry = [[cos(θ/2), -sin(θ/2)], [sin(θ/2), cos(θ/2)]]
-   Result: [α'] = [cos(θ/2)·α + (-sin(θ/2))·β]
-           [β'] = [sin(θ/2)·α + cos(θ/2)·β]
-    @param q Qubit to apply the gate on
-    @param theta Angle in radians
-    @return unit
+  @param qreg The quantum register to which the gate is applied.
+  @param target The index of the target qubit (0-based).
+  @param theta The rotation angle in radians.
 *)
-val ry : q -> float -> unit
+val ry : Register.qreg -> int -> float -> unit
 
-(**Rz gate
-   Matrice Rz = [[exp(-i·θ/2), 0], [0, exp(i·θ/2)]]
-   Result: [α'] = [exp(-i·θ/2)·α + 0·β] = [exp(-i·θ/2)·α]
-           [β'] = [0·α + exp(i·θ/2)·β] = [exp(i·θ/2)·β]
-    @param q Qubit to apply the gate on
-    @param theta Angle in radians
-    @return unit
+(**
+  Apply the Rotation-Z gate to the target qubit of the given quantum register.
+
+  @param qreg The quantum register to which the gate is applied.
+  @param target The index of the target qubit (0-based).
+  @param theta The rotation angle in radians.
 *)
-val rz : q -> float -> unit
+val rz : Register.qreg -> int -> float -> unit
+
+(** Apply the CNOT gate to the target qubit controlled by the control qubit of the given quantum register.
+  
+  @param qreg The quantum register to which the gate is applied.
+  @param control The index of the control qubit (0-based).
+  @param target The index of the target qubit (0-based).
+*)
+val cnot : Register.qreg -> int -> int -> unit

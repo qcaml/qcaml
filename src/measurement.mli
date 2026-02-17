@@ -5,11 +5,14 @@
   license :     Apache-2.0
   description : Implementation of qubit measurement
 *)
-open Qubit
+
 
 (** Measure a qubit in the computational basis.
-    This collapses the qubit to either |0⟩ or |1⟩ based on the probability
+    This collapses one qubit of register to either 
+    |0⟩ or |1⟩ based on the probability
     amplitudes and returns the measurement result.
-    @param q The qubit to measure (will be modified in place)
+
+    @param qreg The qubit register
+    @param target The targer qubit
 *)
-val measure : q -> unit
+val measure : Register.qreg -> int  -> unit 

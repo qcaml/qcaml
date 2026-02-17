@@ -1,16 +1,16 @@
 (**
   @author       Elias GAUTHIER
   file :        complex.mli
-  date :        2025-10-02
+  date :        2026-01-16
   license :     Apache-2.0
   description : Implementation of complex operations.
 *)
 
 (** Type complex with real and imaginary part *)
-type complex = {
-  re : float;
-  im : float;
-}
+type complex = { re: float; im: float}
+
+(** Return complex number as string**)
+val string_of_complex : complex -> string
 
 (** Zero complex number *)
 val zero : complex
@@ -20,6 +20,12 @@ val one : complex
 
 (** Minus one complex number *)
 val minus_one : complex
+
+(** Minus i complex number *)
+val minus_i : complex
+
+(** i complex number *)
+val i : complex
 
 (** Complex multiplication
 
@@ -73,3 +79,10 @@ val cmod: complex -> float
   @return The angle of c
 *)
 val carg : complex -> float
+
+
+(** Complex negation
+  @param c Complex number
+  @return The negation of c
+*)
+val cneg : complex -> complex

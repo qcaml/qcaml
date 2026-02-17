@@ -1,5 +1,5 @@
 (*
- * Copyright 2025 Elias GAUTHIER <elias.gauthier@etu.u-bordeaux.fr>
+ * Copyright 2026 Elias GAUTHIER <elias.gauthier@etu.u-bordeaux.fr>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,35 +14,25 @@
  * limitations under the License.
  *)
 
-open Qubit
-open Complex
-
-type sphere_values = {
+type svalues = {
   phi : float;
   theta : float;
-  alpha_re : float;
-  alpha_im : float;
-  beta_re : float;
-  beta_im : float;
-}
+} 
 
-let get_values q =
-  let phi = (carg q.beta) -. (carg q.alpha) in
-  let theta = 2.0 *. acos (cmod q.alpha) in
-  let alpha_re = q.alpha.re in
-  let alpha_im = q.alpha.im in
-  let beta_re = q.beta.re in
-  let beta_im = q.beta.im in
-  { phi; theta; alpha_re; alpha_im; beta_re; beta_im }
+let get_values (alpha, beta) =
+  let phi = (Complex.carg !beta) -. (Complex.carg !alpha) in
+  let mod_alpha = Complex.cmod !alpha in
+  (* Clamp to [-1, 1] to avoid NaN from floating point errors *)
+  let clamped = max (-1.0) (min 1.0 mod_alpha) in
+  let theta = 2.0 *. acos clamped in
+  { phi; theta }
 
-let get_cartesian_coordinates q =
-  let values = get_values q in
+let get_cartesian_coordinates (alpha, beta) =
+  let values = get_values (alpha, beta) in
   let x = sin values.theta *. cos values.phi in
   let y = sin values.theta *. sin values.phi in
   let z = cos values.theta in
   (x, y, z)
-
-let current_qubit : q option ref = ref None
 
 (* Helper function to draw a 3D arrow *)
 let draw_arrow_3d start_pos end_pos radius color =
@@ -66,7 +56,7 @@ let draw_arrow_3d start_pos end_pos radius color =
     draw_cylinder_ex shaft_end end_pos cone_radius 0.0 8 color;
   end
 
-let rec loop angle_x angle_y font =
+let rec loop alpha beta angle_x angle_y font =
   if Raylib.window_should_close () then ()
   else
     let open Raylib in
@@ -132,13 +122,11 @@ let rec loop angle_x angle_y font =
     done;
 
     (* Display arrow (qubit state) *)
-    (match !current_qubit with
-    | Some q ->
-        let (x, y, z) = get_cartesian_coordinates q in
-        let origin = Vector3.create 0.0 0.0 0.0 in
-        let target = Vector3.create x y z in
-        draw_arrow_3d origin target 0.02 (Color.create 255 140 0 255);
-    | None -> ());
+
+    let (x, y, z) = get_cartesian_coordinates (alpha, beta) in
+    let origin = Vector3.create 0.0 0.0 0.0 in
+    let target = Vector3.create x y z in
+    draw_arrow_3d origin target 0.02 (Color.create 255 140 0 255);
     
     draw_cylinder_ex (Vector3.create (-1.0) 0.0 0.0) (Vector3.create 1.0 0.0 0.0) 0.01 0.005 8 Color.black;
     draw_cylinder_ex (Vector3.create 0.0 (-1.0) 0.0) (Vector3.create 0.0 1.0 0.0) 0.01 0.005 8 Color.black;
@@ -160,22 +148,21 @@ let rec loop angle_x angle_y font =
     draw_text_ex font "|1>" (Vector2.create (Vector2.x z_neg_pos) (Vector2.y z_neg_pos +. 5.0)) 24.0 1.0 Color.black;
 
     (*Show qubit cartesian coordinates*)
-    (match !current_qubit with
-    | Some q ->
-        let (qx, qy, qz) = get_cartesian_coordinates q in
-        let coords_text = Printf.sprintf "x: %.3f  y: %.3f  z: %.3f" qx qy qz in
-        let text_width = measure_text_ex font coords_text 16.0 1.0 in
-        let pos_x = window_width -. (Vector2.x text_width) -. 10.0 in
-        let pos_y = window_height -. 25.0 in
-        draw_text_ex font coords_text (Vector2.create pos_x pos_y) 16.0 1.0 Color.darkgray;
-    | None -> ());
+    let (qx, qy, qz) = get_cartesian_coordinates (alpha, beta) in
+    let coords_text = Printf.sprintf "x: %.3f  y: %.3f  z: %.3f" qx qy qz in
+    let text_width = measure_text_ex font coords_text 16.0 1.0 in
+    let pos_x = window_width -. (Vector2.x text_width) -. 10.0 in
+    let pos_y = window_height -. 25.0 in
+      draw_text_ex font coords_text (Vector2.create pos_x pos_y) 16.0 1.0 Color.darkgray;
 
     end_drawing ();
-    loop new_angle_x new_angle_y font
+    loop alpha beta new_angle_x new_angle_y font
 
-let plot_bloch q () =
-  current_qubit := Some q;
+let plot_bloch (qreg: Register.qreg) target () =
+  let alpha, beta = Register.get_qubit qreg target in
 
+  (* Reset config flags before setting new ones - fixes issue with multiple windows *)
+  Raylib.set_config_flags [];
   Raylib.set_config_flags [Raylib.ConfigFlags.Msaa_4x_hint; Raylib.ConfigFlags.Window_resizable];
   Raylib.init_window 400 400 "qcaml";
   Raylib.set_window_min_size 400 400;
@@ -187,6 +174,6 @@ let plot_bloch q () =
     else
       (Raylib.get_font_default (), false)
   in
-  loop 0.9 (0.8) font;
+  loop alpha beta 0.9 0.8 font;
   if should_unload then Raylib.unload_font font;
   Raylib.close_window ()

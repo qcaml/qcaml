@@ -8,20 +8,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Later
-- Multi-qubit systems
-- Entangling gates (CNOT, Toffoli, SWAP)
+- Additional entangling gates (Toffoli, SWAP)
 - Circuit builder API
 - QASM export functionality
 
-## [0.1.7] - 2026-01-16
+## [1.0.0] - 2026-02-15
 
 ### Added
-- Implementation of rotation gates (Rx, Rz, Ry)
+- N-qubit state registers replacing single-qubit representation
+- Rotation gates (Rx, Ry, Rz) for arbitrary angle rotations
+- CNOT (controlled-NOT) gate for entanglement
+- Partial measurement with state collapse and renormalization on n-qubit registers
+- Tests for CNOT gate (basic flip and Bell state)
+- Tests for measurement (collapse, normalization, multi-qubit)
+
+### Changed
+- Complete architecture rewrite from single-qubit (`Qubit`) to n-qubit registers (`Register`)
+- All gates now operate on `Register.qreg` with a target qubit index
+- Measurement module rewritten for n-qubit registers
+- Examples updated to use the new Register API
 
 ### Removed
-- Eliminating unnecessary explicit dune constraint in dune-project
+- `Qubit` module (replaced by `Register`)
+- S and T phase gates (to be re-added in a future release)
 
-## [0.1.6] - 2026-01-06
+## [0.1.6] - 2026-01-26
 ### Added
 - raylib dependency
 
@@ -80,6 +91,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - No circuit builder API yet
 ---
 
+[1.0.0]: https://github.com/elias-utf8/qcaml/releases/tag/v1.0.0
 [0.1.0]: https://github.com/elias-utf8/qcaml/releases/tag/v0.1.0
 [0.1.1]: https://github.com/elias-utf8/qcaml/releases/tag/v0.1.1
 [0.1.2]: https://github.com/elias-utf8/qcaml/releases/tag/v0.1.2

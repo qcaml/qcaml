@@ -1,29 +1,14 @@
 (executable
- (public_name init_qubit_exe)
- (name init_qubit)
+ (public_name superposition_exe)
+ (name superposition)
  (libraries quantum))
 
 (executable
- (public_name apply_gate_exe)
- (name apply_gate)
+ (public_name interference_exe)
+ (name interference)
  (libraries quantum))
 
 (executable
- (public_name statistics_exe)
- (name statistics)
- (libraries quantum))
-
-(executable
- (public_name bloch_exe)
- (name bloch_sphere)
- (libraries quantum))
-
-(executable
- (public_name measure_exe)
- (name measure)
- (libraries quantum))
-
-(executable
- (public_name rotation_exe)
- (name rotation)
+ (public_name bell_state_exe)
+ (name bell_state)
  (libraries quantum))

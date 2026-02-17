@@ -1,67 +1,108 @@
-open Quantum.Gate
-open Quantum.Qubit
+open Quantum.Register
 open Quantum.Complex
+open Quantum.Gate
+
+let float_eq = Alcotest.(check (float 0.0001))
 
 let test_x () =
-  let q = { alpha = one; beta = zero } in
-  x q;
-  Alcotest.(check (float 0.0001)) "alpha.re" 0.0 q.alpha.re;
-  Alcotest.(check (float 0.0001)) "alpha.im" 0.0 q.alpha.im;
-  Alcotest.(check (float 0.0001)) "beta.re" 1.0 q.beta.re;
-  Alcotest.(check (float 0.0001)) "beta.im" 0.0 q.beta.im
+  let reg = allocate 1 in
+  x reg 0;
+  let amp0 = get_amplitude reg 0 in
+  let amp1 = get_amplitude reg 1 in
+  float_eq "amp |0⟩" 0.0 amp0.re;
+  float_eq "amp |1⟩" 1.0 amp1.re
 
 let test_y () =
-  let q = { alpha = one; beta = zero } in
-  y q;
-  Alcotest.(check (float 0.0001)) "alpha.re" 0.0 q.alpha.re;
-  Alcotest.(check (float 0.0001)) "alpha.im" 0.0 q.alpha.im;
-  Alcotest.(check (float 0.0001)) "beta.re" 0.0 q.beta.re;
-  Alcotest.(check (float 0.0001)) "beta.im" 1.0 q.beta.im
+  let reg = allocate 1 in
+  y reg 0;
+  let amp0 = get_amplitude reg 0 in
+  let amp1 = get_amplitude reg 1 in
+  float_eq "amp |0⟩ re" 0.0 amp0.re;
+  float_eq "amp |0⟩ im" 0.0 amp0.im;
+  float_eq "amp |1⟩ re" 0.0 amp1.re;
+  float_eq "amp |1⟩ im" 1.0 amp1.im
 
 let test_z () =
-  let q = { alpha = one; beta = zero } in
-  z q;
-  Alcotest.(check (float 0.0001)) "alpha.re" 1.0 q.alpha.re;
-  Alcotest.(check (float 0.0001)) "alpha.im" 0.0 q.alpha.im;
-  Alcotest.(check (float 0.0001)) "beta.re" 0.0 q.beta.re;
-  Alcotest.(check (float 0.0001)) "beta.im" 0.0 q.beta.im
+  let reg = allocate 1 in
+  h reg 0;
+  z reg 0;
+  let amp0 = get_amplitude reg 0 in
+  let amp1 = get_amplitude reg 1 in
+  let sqrt2_inv = 1.0 /. sqrt 2.0 in
+  float_eq "amp |0⟩" sqrt2_inv amp0.re;
+  float_eq "amp |1⟩" (-.sqrt2_inv) amp1.re
 
 let test_h () =
-  let q = { alpha = one; beta = zero } in
-  let plus = plus () in
-  h q;
-  Alcotest.(check (float 0.0001)) "alpha.re" plus.alpha.re q.alpha.re;
-  Alcotest.(check (float 0.0001)) "alpha.im" plus.alpha.im q.alpha.im;
-  Alcotest.(check (float 0.0001)) "beta.re" plus.beta.re q.beta.re;
-  Alcotest.(check (float 0.0001)) "beta.im" plus.beta.im q.beta.im
+  let reg = allocate 1 in
+  h reg 0;
+  let amp0 = get_amplitude reg 0 in
+  let amp1 = get_amplitude reg 1 in
+  let sqrt2_inv = 1.0 /. sqrt 2.0 in
+  float_eq "amp |0⟩" sqrt2_inv amp0.re;
+  float_eq "amp |1⟩" sqrt2_inv amp1.re
 
+let test_rx () =
+  let reg = allocate 1 in
+  rx reg 0 Float.pi;
+  let amp0 = get_amplitude reg 0 in
+  let amp1 = get_amplitude reg 1 in
+  float_eq "amp |0⟩ re" 0.0 amp0.re;
+  float_eq "amp |1⟩ im" (-1.0) amp1.im
 
-let test_s () =
-  let q = { alpha = zero; beta = one } in
-  s q;
-  Alcotest.(check (float 0.0001)) "alpha.re" 0.0 q.alpha.re;
-  Alcotest.(check (float 0.0001)) "alpha.im" 0.0 q.alpha.im;
-  Alcotest.(check (float 0.0001)) "beta.re" 0.0 q.beta.re;
+let test_ry () =
+  let reg = allocate 1 in
+  ry reg 0 Float.pi;
+  let amp0 = get_amplitude reg 0 in
+  let amp1 = get_amplitude reg 1 in
+  float_eq "amp |0⟩" 0.0 amp0.re;
+  float_eq "amp |1⟩" 1.0 amp1.re
 
-  Alcotest.(check (float 0.0001)) "beta.im" 1.0 q.beta.im
+let test_rz () =
+  let reg = allocate 1 in
+  h reg 0;
+  rz reg 0 Float.pi;
+  let amp0 = get_amplitude reg 0 in
+  let amp1 = get_amplitude reg 1 in
+  let sqrt2_inv = 1.0 /. sqrt 2.0 in
+  float_eq "amp |0⟩ im" (-.sqrt2_inv) amp0.im;
+  float_eq "amp |1⟩ im" sqrt2_inv amp1.im
 
-let test_t () =
-  let q = { alpha = zero; beta = one } in
-  t q;
-  let sqrt2_2 = sqrt 2.0 /. 2.0 in
-  Alcotest.(check (float 0.0001)) "alpha.re" 0.0 q.alpha.re;
-  Alcotest.(check (float 0.0001)) "alpha.im" 0.0 q.alpha.im;
-  Alcotest.(check (float 0.0001)) "beta.re" sqrt2_2 q.beta.re;
+(* Test CNOT on |10⟩ -> |11⟩ *)
+let test_cnot () =
+  let reg = allocate 2 in
+  x reg 0;  (* Create |10⟩ *)
+  cnot reg 0 1;  (* Should flip to |11⟩ *)
+  let amp11 = get_amplitude reg 3 in
+  float_eq "amp |11⟩" 1.0 amp11.re
 
-  Alcotest.(check (float 0.0001)) "beta.im" sqrt2_2 q.beta.im
+(* Test CNOT creates Bell state *)
+let test_cnot_bell () =
+  let reg = allocate 2 in
+  h reg 0;
+  cnot reg 0 1;
+  let amp00 = get_amplitude reg 0 in
+  let amp11 = get_amplitude reg 3 in
+  let sqrt2_inv = 1.0 /. sqrt 2.0 in
+  float_eq "amp |00⟩" sqrt2_inv amp00.re;
+  float_eq "amp |11⟩" sqrt2_inv amp11.re
 
 let () =
-  let open Alcotest in
-  run "Gates tests" [
-    "x", [ test_case "x" `Quick test_x ];
-    "y", [ test_case "y" `Quick test_y ];
-    "z", [ test_case "z" `Quick test_z ];
-    "h", [ test_case "h" `Quick test_h ];
-    "s", [ test_case "s" `Quick test_s ];
-    "t", [ test_case "t" `Quick test_t ]
+  Alcotest.run "Gate" [
+    "pauli", [
+      Alcotest.test_case "X gate" `Quick test_x;
+      Alcotest.test_case "Y gate" `Quick test_y;
+      Alcotest.test_case "Z gate" `Quick test_z;
+    ];
+    "hadamard", [
+      Alcotest.test_case "H gate" `Quick test_h;
+    ];
+    "rotation", [
+      Alcotest.test_case "Rx gate" `Quick test_rx;
+      Alcotest.test_case "Ry gate" `Quick test_ry;
+      Alcotest.test_case "Rz gate" `Quick test_rz;
+    ];
+    "entangling", [
+      Alcotest.test_case "CNOT" `Quick test_cnot;
+      Alcotest.test_case "Bell state" `Quick test_cnot_bell;
+    ]
   ]
