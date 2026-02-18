@@ -11,6 +11,11 @@ A lightweight OCaml library to experiment with quantum states, gates and measure
 
 QCaml for Quantum (O)Caml is a library for simulating quantum algorithms. It provides n-qubit registers, quantum gates (Pauli, Hadamard, rotations, CNOT), measurement with state collapse, and interactive Bloch sphere visualization.
 
+> [!IMPORTANT]
+>
+> **Status**: The project is not yet mature, and I am looking for contributors to help it grow. Thank you!
+>
+> 
 ## Installation
 ### Prerequisites
 You need the [opam](https://opam.ocaml.org/) package manager to install the OCaml build tools.
