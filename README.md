@@ -3,7 +3,7 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-3c60b1.svg?logo=opensourceinitiative&logoColor=white&style=flat-square)](https://github.com/elias-utf8/qcaml/blob/main/LICENSE)
 [![OCaml](https://img.shields.io/badge/OCaml-5.2-ec6813.svg?style=flat-square&logo=ocaml&logoColor=white)](https://ocaml.org/)
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/elias-utf8/qcaml/test.yml?branch=main&style=flat-square&logo=github&label=tests)
-![GitHub Release](https://img.shields.io/github/v/release/elias-utf8/qcaml?style=flat-square&logo=gitlfs&logoColor=white)
+![GitHub Release](https://img.shields.io/github/v/release/qcaml/qcaml?style=flat-square&logo=gitlfs&logoColor=white)
 
 ## Presentation 
 
