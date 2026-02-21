@@ -66,10 +66,11 @@ let () =
 
 ## Architecture
 <p align="center">
-  <img src="https://github.com/elias-utf8/qcaml/blob/main/assets/images/diag_qcaml.svg" alt="QCaml architecture diagram">
+  <img src="https://github.com/elias-utf8/qcaml/blob/main/assets/images/diag.png" alt="QCaml architecture diagram" width"=550>
 </p>
 
 ## Features
+
 <table>
   <thead>
     <tr>
