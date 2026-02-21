@@ -66,7 +66,7 @@ let () =
 
 ## Architecture
 <p align="center">
-  <img src="https://github.com/elias-utf8/qcaml/blob/main/assets/images/diag.png" alt="QCaml architecture diagram" width"=550>
+  <img src="https://github.com/elias-utf8/qcaml/blob/main/assets/images/diag.png" alt="QCaml architecture diagram" width"=450>
 </p>
 
 ## Features
