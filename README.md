@@ -124,10 +124,11 @@ let () =
 </p>
 
 ## Acknowledgements
-**Quantum Computing Course – Math and Theory for Beginners :** https://youtu.be/tsbCSkvHhMo?si=XTbz10_b1v1aAS-3
+Quantum Computing Course – Math and Theory for Beginners : https://youtu.be/tsbCSkvHhMo?si=XTbz10_b1v1aAS-3
 
 ## Citation
-
+If you use QCaml in your work, please cite with [CITATION.cff](https://github.com/qcaml/qcaml/blob/readme/CITATION.cff) :<br>
+`Gauthier, E. (2026). QCaml (Version 1.0.0) [Computer software]. https://github.com/qcaml/qcaml`
 
 ## License
 [Apache License 2.0](https://github.com/qcaml/qcaml/blob/main/LICENSE)
