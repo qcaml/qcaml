@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "QCaml"
+abstract: "A lightweight OCaml library to experiment with quantum states, gates and simulating quantum algorithms."
+type: software
+authors:
+  - given-names: Elias
+    family-names: Gauthier
+    email: gauthierelias@pm.me
+repository-code: "https://github.com/qcaml/qcaml"
+license: Apache-2.0
+version: "1.0.0"
+date-released: "2026-02-17"
+keywords:
+  - quantum-computing
+  - ocaml
+  - simulation
+  - bloch-sphere
