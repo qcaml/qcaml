@@ -44,23 +44,14 @@ Try this simple example by running `dune exec examples/superposition.exe` to vis
 (* examples/superposition.ml *)
 open Quantum
 let () =
-  (* allocate a 1-qubit register in |0⟩ *)
-  let reg = Register.allocate 1 in
-
-  (* print state before transformation *)
-  Register.display_qubit reg 0;     
-  
-  (* apply Hadamard: |0⟩ > |+⟩ *)
-  Gate.h reg 0;                     
-
-  (* print state after superposition *)
-  Register.display_qubit reg 0;
-
-  (* display qubit 0 on the Bloch sphere *)
-  Visualization.plot_bloch reg 0 ()
+  let reg = Register.allocate 1 in  (* allocate a 1-qubit register in |0⟩ *)
+  Register.display_qubit reg 0;     (* print state before transformation *)
+  Gate.h reg 0;                     (* apply Hadamard: |0⟩ -> |+⟩ *)
+  Register.display_qubit reg 0;     (* print state after superposition *)
+  Visualization.plot_bloch reg 0 () (* display qubit 0 on the Bloch sphere *)
 ```
 
-The first thing to do is to open the `Quantum` module, which gives access to all of QCaml's features. Then we allocate a register of 1 qubit with `Register.allocate 1` — this register is initialized in the $|0\rangle$ state.
+The first thing to do is to open the `Quantum` module, which gives access to all of QCaml's features. Then we allocate a register of 1 qubit with `Register.allocate 1`, this register is initialized in the $|0\rangle$ state.
 <br>We call `Register.display_qubit reg 0` to print the qubit's state vector before any transformation.
 <br>Next we apply an Hadamard gate on the first qubit with `Gate.h reg 0`, which creates an equal superposition: the qubit goes from $|0\rangle$ to $|+\rangle = \frac{|0\rangle + |1\rangle}{\sqrt{2}}$. A second `display_qubit` call lets us see the new amplitudes.
 <br>Finally, `Visualization.plot_bloch reg 0 ()` opens an interactive Bloch sphere window showing where the qubit sits on the sphere reflecting the equal superposition.
