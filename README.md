@@ -58,9 +58,11 @@ let () =
       <br>We call <code>Register.display_qubit reg 0</code> to print the qubit's state vector before any transformation.
       <br>Next we apply an Hadamard gate on the first qubit with <code>Gate.h reg 0</code>, which creates an equal superposition: the qubit goes from $|0\rangle$ to $|+\rangle = \frac{|0\rangle + |1\rangle}{\sqrt{2}}$. A second <code>display_qubit</code> call lets us see the new amplitudes.
       <br>Finally, <code>Visualization.plot_bloch reg 0 ()</code> opens an interactive Bloch sphere window showing where the qubit sits on the sphere reflecting the equal superposition.
+      <br><br>
+      We could then measure the qubit so that it collapses into a state of 0 or 1 with <code>Measurement.measure reg 0;</code>
     </td>
     <td>
-      <img src="https://github.com/qcaml/qcaml/blob/main/assets/images/bloch.png" alt="Bloch Sphere" width="350">
+      <img src="https://github.com/qcaml/qcaml/blob/main/assets/images/bloch.png" alt="Bloch Sphere" width="1000">
     </td>
   </tr>
 </table>
