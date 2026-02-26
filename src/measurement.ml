@@ -13,20 +13,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *)
-open Qubit
-open Complex
 
-let measure q =
-  let p0 = cmod q.alpha *. cmod q.alpha in  (* Probability of |0⟩ *)
-
-  Random.self_init ();  (* Initialize RNG with a random seed *)
-  let rand = Random.float 1.0 in
-  if rand < p0 then begin
-    (* Collapse to |0⟩ *)
-    q.alpha <- Complex.one;
-    q.beta <- Complex.zero;
-  end else begin
-    (* Collapse to |1⟩ *)
-    q.alpha <- Complex.zero;
-    q.beta <- Complex.one;
-  end
+let measure qreg target =
+    let ran_number = Utils.randfloat () in
+    let p0 = ref 0.0 in
+    for i = 0 to Register.dim qreg - 1 do
+        if i land (1 lsl target) = 0 then
+            p0 := !p0 +. (Complex.cmod (Register.get_amplitude qreg i)) ** 2.0
+    done;
+    if ran_number < !p0 then begin
+        (* measurement gives 0 *)
+        for i = 0 to Register.dim qreg - 1 do
+            if i land (1 lsl target) <> 0 then
+                Register.set_amplitude qreg i Complex.zero
+        done;
+        (* normalize *)
+        let norm = sqrt !p0 in
+        for i = 0 to Register.dim qreg - 1 do
+            let amp = Register.get_amplitude qreg i in
+            Register.set_amplitude qreg i (Complex.cmul_scalar (1.0 /. norm) amp)
+        done
+    end else begin
+        (* measurement gives 1 *)
+        for i = 0 to Register.dim qreg - 1 do
+            if i land (1 lsl target) = 0 then
+                Register.set_amplitude qreg i Complex.zero
+        done;
+        (* normalize *)
+        let norm = sqrt (1.0 -. !p0) in
+        for i = 0 to Register.dim qreg - 1 do
+            let amp = Register.get_amplitude qreg i in
+            Register.set_amplitude qreg i (Complex.cmul_scalar (1.0 /. norm) amp)
+        done
+    end

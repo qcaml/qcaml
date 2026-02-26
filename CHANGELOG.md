@@ -8,12 +8,54 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Later
-- Phase gate (S)
-- Rotation gates (Rx, Ry, Rz)
-- Multi-qubit systems with tensor products
-- Entangling gates (CNOT, Toffoli, SWAP)
+- Additional entangling gates (Toffoli, SWAP)
 - Circuit builder API
 - QASM export functionality
+
+## [1.0.0] - 2026-02-15
+
+### Added
+- N-qubit state registers replacing single-qubit representation
+- Rotation gates (Rx, Ry, Rz) for arbitrary angle rotations
+- CNOT (controlled-NOT) gate for entanglement
+- Partial measurement with state collapse and renormalization on n-qubit registers
+- Tests for CNOT gate (basic flip and Bell state)
+- Tests for measurement (collapse, normalization, multi-qubit)
+
+### Changed
+- Complete architecture rewrite from single-qubit (`Qubit`) to n-qubit registers (`Register`)
+- All gates now operate on `Register.qreg` with a target qubit index
+- Measurement module rewritten for n-qubit registers
+- Examples updated to use the new Register API
+
+### Removed
+- `Qubit` module (replaced by `Register`)
+- S and T phase gates (to be re-added in a future release)
+
+## [0.1.6] - 2026-01-26
+### Added
+- raylib dependency
+
+### Changed
+- Migrating to ocaml-raylib for bloch sphere visualisation
+
+### Removed
+- OpenGL/glut dependency
+- discover.ml file
+
+## [0.1.5] - 2025-12-13
+### Added
+- S (phase) gate
+- T (π/8) gate
+- Unit tests for S and T gates
+
+### Changed
+- Improved .gitignore to exclude .vscode directory
+
+## [0.1.4] - 2025-12-13
+### Fixed
+- macOS ARM64 support: Fixed OpenGL/GLUT header detection on Apple Silicon Macs by using /opt/homebrew/include instead of /usr/local/include
+- FreeBSD compatibility: Fixed incorrect macOS detection that was breaking FreeBSD builds.
 
 ## [0.1.3] - 2025-11-2
 ### Changed 
@@ -47,11 +89,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Single-qubit operations only (no multi-qubit support)
 - Limited gate set
 - No circuit builder API yet
-- Bloch sphere visualization can be a little buggy
-
 ---
 
+[1.0.0]: https://github.com/elias-utf8/qcaml/releases/tag/v1.0.0
 [0.1.0]: https://github.com/elias-utf8/qcaml/releases/tag/v0.1.0
 [0.1.1]: https://github.com/elias-utf8/qcaml/releases/tag/v0.1.1
 [0.1.2]: https://github.com/elias-utf8/qcaml/releases/tag/v0.1.2
 [0.1.3]: https://github.com/elias-utf8/qcaml/releases/tag/v0.1.3
+[0.1.4]: https://github.com/elias-utf8/qcaml/releases/tag/v0.1.4
+[0.1.5]: https://github.com/elias-utf8/qcaml/releases/tag/v0.1.5
+[0.1.6]: https://github.com/elias-utf8/qcaml/releases/tag/v0.1.6
+[0.1.7]: https://github.com/elias-utf8/qcaml/releases/tag/v0.1.7
+
+

@@ -1,6 +1,6 @@
 (lang dune 3.17)
 (name qcaml)
-(version 0.1.4)
+(version 1.0.0)
 (use_standard_c_and_cxx_flags false)
 (generate_opam_files true)
 
@@ -13,23 +13,22 @@
 
 (package
  (name qcaml)
- (synopsis "Experimental OCaml library for quantum computing simulation")
+ (synopsis "OCaml library for quantum computing simulation")
  (description "\
-QCaml is a lightweight OCaml library for experimenting with quantum states,
-gates and measurements. It provides tools for learning quantum computing
-concepts and visualizing qubit states on the Bloch sphere.
+QCaml is a lightweight OCaml library for simulating quantum algorithms.
+It provides n-qubit registers, quantum gates and measurements for learning
+quantum computing concepts and visualizing qubit states on the Bloch sphere.
 
 Features:
-- Single qubit state representation with complex amplitudes
-- Fundamental quantum gates (Hadamard, Pauli-X/Y/Z)
-- Quantum measurements with probabilistic state collapse
-- Interactive Bloch sphere visualization using OpenGL/GLUT
+- N-qubit state registers with complex amplitudes
+- Quantum gates (Pauli-X/Y/Z, Hadamard, Rx, Ry, Rz, CNOT)
+- Quantum measurements with probabilistic collapse and renormalization
+- Interactive Bloch sphere visualization using Raylib
 - Comprehensive test suite")
  (depends
   (ocaml (>= 5.2))
-  (dune (>= 3.17))
   dune-configurator
-  conf-freeglut
+  raylib
   (alcotest :with-test)
   (odoc :with-doc)
   (bisect_ppx :with-test))

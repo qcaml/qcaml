@@ -1,8 +1,8 @@
-name: Build
+name: Pages
 
 on:
   push:
-    branches: [ main ]
+    branches: [ gh-pages ]
   workflow_dispatch:
 
 permissions:
@@ -27,13 +27,17 @@ jobs:
           ocaml-compiler: 5.2.1
           opam-disable-sandboxing: true
       
-      - name: Install dependencies
+      - name: Install system dependencies
         run: |
-          sudo apt-get update && sudo apt-get install -y libglu1-mesa-dev
-          opam install . --deps-only --with-doc --yes || true
-          opam install odoc --yes
+          sudo apt-get update
+          sudo apt-get install -y libgl1-mesa-dev libxi-dev libxcursor-dev libxrandr-dev libxinerama-dev
       
-      - name: Generate documentation
+      - name: Install OCaml dependencies
+        run: |
+          opam install . --deps-only --with-doc
+          opam install raylib
+      
+      - name: Generate documentations
         run: opam exec -- dune build @doc
       
       - name: Prepare docs

@@ -1,20 +1,19 @@
 # <img src="https://github.com/elias-utf8/qcaml/blob/main/assets/images/qcaml_banner.png" alt="QCaml logo" width="250"/>
 
-A lightweight OCaml library to experiment with quantum states, gates and measurements. For learning quantum computing concepts and visualizing qubit states on the Bloch sphere.
-
 [![License](https://img.shields.io/badge/License-Apache%202.0-3c60b1.svg?logo=opensourceinitiative&logoColor=white&style=flat-square)](https://github.com/elias-utf8/qcaml/blob/main/LICENSE)
 [![OCaml](https://img.shields.io/badge/OCaml-5.2-ec6813.svg?style=flat-square&logo=ocaml&logoColor=white)](https://ocaml.org/)
-[![CI Status](https://img.shields.io/github/actions/workflow/status/elias-utf8/qcaml/main.yml?style=flat-square&logo=github&label=build)](https://github.com/elias-utf8/qcaml/actions/workflows/main.yml)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/elias-utf8/qcaml/test.yml?branch=main&style=flat-square&logo=github&label=tests)
+![GitHub Release](https://img.shields.io/github/v/release/qcaml/qcaml?style=flat-square&logo=gitlfs&logoColor=white)
 
-## Presentation <img src="https://github.com/elias-utf8/qcaml/blob/main/assets/images/code_snippet.png" width="400px" align="right">
+## Presentation 
 
-QCaml for Quantum (O)Caml is an experimental library for simulating quantum algorithms. This library is currently under development. Among the MVP's features are qubit declaration, application of classical gates (X,Y,Z,H), measurement, and visualization.
+QCaml for Quantum (O)Caml is a lightweight library to experiment with quantum states, gates and simulating quantum algorithms. It provides n-qubit registers, quantum gates (Pauli, Hadamard, rotations, CNOT), measurement with state collapse, and interactive Bloch sphere visualization.
+
 > [!IMPORTANT]
 >
-> **Status**: This library is currently in early development and may change significantly.
+> **Status**: The project is not yet mature, and I am looking for contributors to help it grow. Thank you!
 >
-<br>
-
+> 
 ## Installation
 ### Prerequisites
 You need the [opam](https://opam.ocaml.org/) package manager to install the OCaml build tools.
@@ -23,7 +22,7 @@ $ sudo apt install opam   # debian/ubuntu
 $ opam init
 $ opam switch create 5.2.0
 $ eval $(opam env)
-$ opam install dune odoc alcotest bisect_ppx
+$ opam install dune odoc alcotest bisect_ppx raylib
 ```
 ### Install from OPAM (recommended)
 QCaml is now available on the official OPAM repository, so you can install it directly:
@@ -42,30 +41,36 @@ $ opam install .
 ```
 
 ## Quick start
-Try this simple example by running `dune exec examples/bloch_sphere.exe` to visualize a superposition state on the Bloch sphere:
-
-<table>
+Try this simple example by running `dune exec examples/superposition.exe` to visualize a qubit in superposition on the Bloch sphere:
+<table align="center">
 <tr>
 <td>
-
+  
 ```ocaml
-(* examples/bloch_sphere.ml *)
+(* examples/superposition.ml *)
 open Quantum
-
 let () =
-  let q = Qubit.plus () in
-  Visualization.plot_bloch q;
-  Measurement.measure q;
-  Printf.printf "%s\n" (Qubit.print () q);
+  let reg = Register.allocate 1 in
+  Register.display_qubit reg 0;
+  Gate.h reg 0;
+  Register.display_qubit reg 0;
+  Visualization.plot_bloch reg 0 ()
 ```
+
 </td>
 <td>
-  <img src="https://github.com/elias-utf8/qcaml/blob/main/assets/images/bloch.png" alt="Bloch Sphere" width="400">
+  <img src="https://github.com/qcaml/qcaml/blob/main/assets/images/bloch.png" alt="Bloch Sphere" width="350">
 </td>
 </tr>
 </table>
 
+## Architecture
+<p align="center">
+  <img src="https://github.com/elias-utf8/qcaml/blob/main/assets/images/diag.png" alt="QCaml architecture diagram" width="600">
+</p>
+
 ## Features
+
 <table>
   <thead>
     <tr>
@@ -97,24 +102,19 @@ let () =
       <td>Visualization of qubit states on the Bloch sphere</td>
     </tr>
     <tr>
-      <td><strong>Advanced Gate</strong></td>
-      <td><span>In progress..</span></td>
-      <td>Extended gate set (Phase and rotation gates)</td>
-    </tr>
-    <tr>
-      <td><strong>Circuit Builder</strong></td>
-      <td><span>○ Planned</span></td>
-      <td>High-level API for composing and optimizing quantum circuits</td>
+      <td><strong>Rotation Gates</strong></td>
+      <td><span>✓ Completed</span></td>
+      <td>Rx, Ry, Rz with arbitrary angle rotations</td>
     </tr>
     <tr>
       <td><strong>Multi-Qubit Operations</strong></td>
-      <td><span>○ Planned</span></td>
-      <td>Efficient tensor product operations for n-qubit systems</td>
+      <td><span>✓ Completed</span></td>
+      <td>N-qubit registers with CNOT entangling gate</td>
     </tr>
     <tr>
       <td><strong>Simulator</strong></td>
-      <td><span>○ Planned (I will never have time)</span></td>
-      <td>Export circuits to standard formats (QASM, diagram generation)</td>
+      <td><span>○ Planned</span></td>
+      <td>Circuit builder API, QASM export</td>
     </tr>
   </tbody>
 </table>
@@ -122,7 +122,7 @@ let () =
 ## Documentation
 <p>
 
-   API Reference: Generated documentation at `_build/default/_doc/_html/index.html` (after running dune build @doc) or see [online documentation](https://elias-utf8.github.io/qcaml/) )
+   API Reference: Generated documentation at `_build/default/_doc/_html/index.html` (after running dune build @doc) or see [online documentation](https://qcaml.github.io/qcaml/) )
 </p>
 
 ## Resources
