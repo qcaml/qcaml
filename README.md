@@ -44,28 +44,28 @@ Try this simple example by running `dune exec examples/superposition.exe` to vis
 (* examples/superposition.ml *)
 open Quantum
 let () =
-  (* allocate a 1-qubit register in |0⟩ *)
-  let reg = Register.allocate 1 in
-
-  (* print state before transformation *)
-  Register.display_qubit reg 0;     
-  
-  (* apply Hadamard: |0⟩ > |+⟩ *)
-  Gate.h reg 0;                     
-
-  (* print state after superposition *)
-  Register.display_qubit reg 0;
-
-  (* display qubit 0 on the Bloch sphere *)
-  Visualization.plot_bloch reg 0 ()
+  let reg = Register.allocate 1 in  (* allocate a 1-qubit register in |0⟩ *)
+  Register.display_qubit reg 0;     (* print state before transformation *)
+  Gate.h reg 0;                     (* apply Hadamard: |0⟩ -> |+⟩ *)
+  Register.display_qubit reg 0;     (* print state after superposition *)
+  Visualization.plot_bloch reg 0 () (* display qubit 0 on the Bloch sphere *)
 ```
 
-The first thing to do is to open the `Quantum` module, which gives access to all of QCaml's features. Then we allocate a register of 1 qubit with `Register.allocate 1` — this register is initialized in the $|0\rangle$ state.
-<br>We call `Register.display_qubit reg 0` to print the qubit's state vector before any transformation.
-<br>Next we apply an Hadamard gate on the first qubit with `Gate.h reg 0`, which creates an equal superposition: the qubit goes from $|0\rangle$ to $|+\rangle = \frac{|0\rangle + |1\rangle}{\sqrt{2}}$. A second `display_qubit` call lets us see the new amplitudes.
-<br>Finally, `Visualization.plot_bloch reg 0 ()` opens an interactive Bloch sphere window showing where the qubit sits on the sphere reflecting the equal superposition.
-
-<img src="https://github.com/qcaml/qcaml/blob/main/assets/images/bloch.png" alt="Bloch Sphere" width="350">
+<table>
+  <tr>
+    <td>
+      The first thing to do is to open the <code>Quantum</code> module, which gives access to all of QCaml's features. Then we allocate a register of 1 qubit with <code>Register.allocate 1</code>, this register is initialized in the $|0\rangle$ state.
+      <br>We call <code>Register.display_qubit reg 0</code> to print the qubit's state vector before any transformation.
+      <br>Next we apply an Hadamard gate on the first qubit with <code>Gate.h reg 0</code>, which creates an equal superposition: the qubit goes from $|0\rangle$ to $|+\rangle = \frac{|0\rangle + |1\rangle}{\sqrt{2}}$. A second <code>display_qubit</code> call lets us see the new amplitudes.
+      <br>Finally, <code>Visualization.plot_bloch reg 0 ()</code> opens an interactive Bloch sphere window showing where the qubit sits on the sphere reflecting the equal superposition.
+      <br><br>
+      We could then measure the qubit so that it collapses into a state of 0 or 1 with <code>Measurement.measure reg 0;</code>
+    </td>
+    <td>
+      <img src="https://github.com/qcaml/qcaml/blob/main/assets/images/bloch.png" alt="Bloch Sphere" width="1000">
+    </td>
+  </tr>
+</table>
 
 ## Features
 
@@ -124,10 +124,11 @@ The first thing to do is to open the `Quantum` module, which gives access to all
 </p>
 
 ## Acknowledgements
-**Quantum Computing Course – Math and Theory for Beginners :** https://youtu.be/tsbCSkvHhMo?si=XTbz10_b1v1aAS-3
+Quantum Computing Course – Math and Theory for Beginners : https://youtu.be/tsbCSkvHhMo?si=XTbz10_b1v1aAS-3
 
 ## Citation
-
+If you use QCaml in your work, please cite with [CITATION.cff](https://github.com/qcaml/qcaml/blob/readme/CITATION.cff) :<br>
+`Gauthier, E. (2026). QCaml (Version 1.0.0) [Computer software]. https://github.com/qcaml/qcaml`
 
 ## License
 [Apache License 2.0](https://github.com/qcaml/qcaml/blob/main/LICENSE)
