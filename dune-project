@@ -28,7 +28,7 @@ Features:
  (depends
   (ocaml (>= 5.2))
   dune-configurator
-  raylib
+  (raylib (>= 2.0.0))
   (alcotest :with-test)
   (odoc :with-doc)
   (bisect_ppx :with-test))

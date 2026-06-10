@@ -161,9 +161,7 @@ let rec loop alpha beta angle_x angle_y font =
 let plot_bloch (qreg: Register.qreg) target () =
   let alpha, beta = Register.get_qubit qreg target in
 
-  (* Reset config flags before setting new ones - fixes issue with multiple windows *)
-  Raylib.set_config_flags [];
-  Raylib.set_config_flags [Raylib.ConfigFlags.Msaa_4x_hint; Raylib.ConfigFlags.Window_resizable];
+  Raylib.set_config_flags Raylib.ConfigFlags.(msaa_4x_hint + window_resizable);
   Raylib.init_window 400 400 "qcaml";
   Raylib.set_window_min_size 400 400;
   Raylib.set_target_fps 60;
